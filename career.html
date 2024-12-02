@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vice Ganda - Career & Achievements</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Vice Ganda</h1>
+        <p>Career Journey & Milestones</p>
+    </header>
+
+    <nav class="nav-links">
+        <a href="index.html" id="home-link">Home</a>
+        <a href="career.html" id="career-link">Career</a>
+        <a href="fan-messages.html">Fan Messages</a>
+        <a href="gallery.html">Photo Gallery</a>
+    </nav>
+
+    <div class="container">
+        <section class="timeline" id="career-timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Stand-up Comedy Beginnings</h3>
+                    <p>Started performing stand-up comedy in comedy bars, quickly gaining popularity for his sharp wit and humor.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Television Breakthrough</h3>
+                    <p>Rose to fame as a host on "Gandang Gabi, Vice" and became a mainstay on "It's Showtime".</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Film Career</h3>
+                    <p>Began starring in box office hit movies, becoming one of the most bankable stars in Philippine cinema.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>LGBTQ+ Representation</h3>
+                    <p>Became an influential LGBTQ+ icon, breaking barriers and challenging stereotypes in Philippine entertainment.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="movies-section">
+            <h2 style="color: #ff6b9e;">Notable Films</h2>
+            <div class="movie-grid" id="movies-grid"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Vice Ganda Fansite | Celebrating a Legendary Career</p>
+    </footer>
+
+    <script>
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        timelineItems.forEach(item => observer.observe(item));
+
+        const moviesData = [
+            {
+                title: "The Amazing Praybeyt Benjamin",
+                year: 2014,
+                description: "Comedy film that showcased Vice Ganda's acting and comedic skills."
+            },
+            {
+                title: "Beauty and the Bestie",
+                year: 2015,
+                description: "Blockbuster comedy that was a massive box office success."
+            },
+            {
+                title: "The Super Parental Guardians",
+                year: 2016,
+                description: "Another hit comedy that demonstrated Vice's star power."
+            },
+            {
+                title: "Fantastica",
+                year: 2018,
+                description: "A comedy film that further solidified Vice's status in Philippine cinema."
+            }
+        ];
+
+        const moviesGrid = document.getElementById('movies-grid');
+
+        moviesData.forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.classList.add('movie-card');
+            movieCard.innerHTML = `
+                <h3>${movie.title}</h3>
+                <p>Year: ${movie.year}</p>
+                <p>${movie.description}</p>
+            `;
+            moviesGrid.appendChild(movieCard);
+        });
+
+        const careerLink = document.getElementById('career-link');
+
+        careerLink.addEventListener('click', () => {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>

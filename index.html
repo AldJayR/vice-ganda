@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vice Ganda - Comedian & Entertainer</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Vice Ganda</h1>
+        <p>Comedian | Host | Performer | Icon</p>
+    </header>
+
+    <nav class="nav-links">
+        <a href="index.html" id="home-link">Home</a>
+        <a href="career.html" id="career-link">Career</a>
+        <a href="fan-messages.html">Fan Messages</a>
+        <a href="gallery.html" class="active">Photo Gallery</a>
+
+
+    </nav>
+
+    <div class="container">
+        <section class="about">
+            <img src="images/vice-ganda.jfif" alt="Vice Ganda" class="about-image" id="profile-image">
+            <div class="about-text">
+                <h2>About Vice Ganda</h2>
+                <p>Vice Ganda, born Jose Marie Borja Viceral, is a popular Filipino comedian, television host, actress, and recording artist. Known for her sharp wit, comedic timing, and iconic hosting style, she has become one of the most recognizable personalities in Philippine entertainment.</p>
+            </div>
+        </section>
+
+        <section class="achievements">
+            <h2>Career Highlights</h2>
+            <ul id="achievements-list">
+                <li>Award-winning comedian and host of "It's Showtime"</li>
+                <li>Successful film actress with multiple box office hits</li>
+                <li>Influential media personality with massive social media following</li>
+                <li>Stand-up comedy performer and YouTube content creator</li>
+                <li>LGBTQ+ icon and advocate for diversity and inclusion</li>
+            </ul>
+        </section>
+
+        <section id="quote-section">
+            <div id="quote-text">"Maganda ako, matalino pa!"</div>
+            <button id="change-quote">Change Quote</button>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Vice Ganda Fansite | Celebrating Talent and Humor</p>
+    </footer>
+
+    <script>
+        const profileImage = document.getElementById('profile-image');
+        const colors = ['#ff6b9e', '#ff3385', '#ff0066', '#cc0052', '#990040'];
+        
+        profileImage.addEventListener('click', () => {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            profileImage.style.borderColor = randomColor;
+        });
+
+        const achievementItems = document.querySelectorAll('#achievements-list li');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        achievementItems.forEach(item => observer.observe(item));
+
+        const quoteText = document.getElementById('quote-text');
+        const changeQuoteBtn = document.getElementById('change-quote');
+
+        const viceQuotes = [
+            '"Maganda ako, matalino pa!"',
+            '"Anong balita? Chika!"',
+            '"Charot!"',
+            '"Walang basagan ng trip!"',
+            '"Bes, feeling ko maganda ako ngayon!"',
+            '"Beybie, pakielam!"',
+            '"Boom panes!"'
+        ];
+
+        changeQuoteBtn.addEventListener('click', () => {
+            const currentQuote = quoteText.textContent;
+            let newQuote;
+            
+            do {
+                newQuote = viceQuotes[Math.floor(Math.random() * viceQuotes.length)];
+            } while (newQuote === currentQuote);
+
+            quoteText.textContent = newQuote;
+        });
+    </script>
+</body>
+</html>

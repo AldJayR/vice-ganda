@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vice Ganda - Fan Messages</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Fan Messages</h1>
+        <p>Leave your message for Vice Ganda!</p>
+    </header>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="career.html">Career</a>
+        <a href="fan-messages.html" class="active">Fan Messages</a>
+        <a href="gallery.html">Photo Gallery</a>
+
+    </nav>
+
+    <div class="container">
+        <section class="message-form">
+            <h2>Write Your Message</h2>
+            <form id="fan-form">
+                <textarea id="message-input" rows="5" placeholder="Your message..." required></textarea>
+                <button type="submit" id="submit-message">Submit</button>
+            </form>
+        </section>
+
+        <section class="message-display">
+            <h2>Messages from Fans</h2>
+            <ul id="message-list"></ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Vice Ganda Fansite | Thank you for your support!</p>
+    </footer>
+
+    <script>
+        const fanForm = document.getElementById('fan-form');
+        const messageInput = document.getElementById('message-input');
+        const messageList = document.getElementById('message-list');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedMessages = JSON.parse(localStorage.getItem('fanMessages')) || [];
+            savedMessages.forEach((message) => addMessageToList(message));
+        });
+
+
+        function addMessageToList(messageText) {
+
+            
+            const newMessage = document.createElement('li');
+            newMessage.textContent = messageText;
+            messageList.appendChild(newMessage);
+        }
+
+        fanForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const messageText = messageInput.value.trim();
+
+            if (messageText) {
+                addMessageToList(messageText);
+
+                const currentMessages = JSON.parse(localStorage.getItem('fanMessages')) || [];
+                currentMessages.push(messageText);
+                localStorage.setItem('fanMessages', JSON.stringify(currentMessages));
+
+                messageInput.value = '';
+            }
+        });
+
+    </script>
+</body>
+</html>
