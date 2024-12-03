@@ -31,6 +31,7 @@
 
         <section class="message-display">
             <h2>Messages from Fans</h2>
+            <button id="clear-all" class="clear-all">Clear All</button>
             <ul id="message-list"></ul>
         </section>
     </div>
@@ -50,12 +51,28 @@
         });
 
 
-        function addMessageToList(messageText) {
-
-            
+        function addMessageToList(messageText) {            
             const newMessage = document.createElement('li');
             newMessage.textContent = messageText;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete-button';
+
+            deleteButton.addEventListener('click', () => {
+                newMessage.remove();
+                removeMessageFromStorage(messageText);
+            });
+
+            newMessage.appendChild(deleteButton);
+
             messageList.appendChild(newMessage);
+        }
+
+        function removeMessageFromStorage(messageText) {
+            let currentMessages = JSON.parse(localStorage.getItem('fanMessages')) || [];
+            currentMessages = currentMessages.filter((message) => message !== messageText);
+            localStorage.setItem('fanMessages', JSON.stringify(currentMessages));
         }
 
         fanForm.addEventListener('submit', (event) => {
@@ -72,6 +89,11 @@
 
                 messageInput.value = '';
             }
+        });
+
+        document.getElementById('clear-all').addEventListener('click', () => {
+            localStorage.removeItem('fanMessages');
+            messageList.innerHTML = '';
         });
 
     </script>
